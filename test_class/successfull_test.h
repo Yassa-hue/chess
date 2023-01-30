@@ -22,13 +22,21 @@ using namespace std;
 
 template <typename TestOutput>
 
-class SuccessfullTest {
+class SuccessfullTest : public Test {
 protected:
     TestOutput testOutput;
 
 
 public:
-    SuccessfullTest(string name, int id, TestInput testInput, TestOutput testOutput);
+    SuccessfullTest(string name, int id, TestInput testInput, TestOutput testOutput) 
+        : Test(name, id, testInput), testOutput(testOutput) {
+
+    }
+
+
+    const TestOutput &getTestOutput () const {
+        return testOutput;
+    }
 
 
 };

@@ -23,7 +23,9 @@ template <typename TestInput>
 
 class FallingTest : public Test{
 public:
-    FallingTest(string name, int id, TestInput testInput);
+    FallingTest(string name, int id, TestInput testInput) : Test(name, id, testInput) {
+        
+    }
 
 };
 

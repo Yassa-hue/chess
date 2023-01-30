@@ -29,7 +29,23 @@ protected:
 
 public:
 
-    Test(string name, int id, TestInput testInput);
+    Test(string name, int id, TestInput testInput) : name(name), id(id), testInput(testInput) {
+
+    }
+
+
+    const string &getName () const {
+        return name;
+    }
+
+    int getId () const {
+        return id;
+    }
+
+
+    const TestInput &getTestInput () const {
+        return testInput;
+    }
 
 
 };
