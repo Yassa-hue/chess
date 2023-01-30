@@ -1,25 +1,34 @@
 
+#ifndef GAME_EXCEPTION_CLASS_DECLARATION
+#define GAME_EXCEPTION_CLASS_DECLARATION
 
-
-
-#ifndef GAME_EXCEPTION_CLASS
-#define GAME_EXCEPTION_CLASS
 
 
 
 #include <iostream>
 
+
+
 using namespace std;
 
 
-class GameException : exception{
-private:
+class GameException : public exception {
+protected:
+
     string errMsg;
+
+
 public:
 
-    GameException(string errMsg);
+    GameException(string errMsg) : exception(), errMsg(errMsg) {
 
-    const string &getErrMsg() const;
+    };
+
+
+    const string &getErrMsg () const {
+        return errMsg;
+    } 
+
 };
 
 
@@ -27,4 +36,4 @@ public:
 
 
 
-#endif
+#endif // GAME_EXCEPTION_CLASS_DECLARATION
