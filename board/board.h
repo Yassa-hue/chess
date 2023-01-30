@@ -5,6 +5,7 @@
 #define BOARD_CLASS_DECLARATION
 
 #include "../square/square.h"
+#include "../position_struct.h"
 
 #define NO_CHECK 1
 #define CHECK 2
@@ -18,7 +19,7 @@ private:
 
 public:
     
-    void movePiece(int fromXPosition, int fromYPosition, int toXPosition, int toYPosition, int playerColor);
+    void movePiece(Position fromPosition, Position toPosition, int playerColor);
 
 
     bool check(bool kingColor) const;

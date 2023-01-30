@@ -20,6 +20,7 @@
 
 #include <iostream>
 #include <vector>
+#include "../position_struct.h"
 
 
 
@@ -38,22 +39,20 @@ protected:
     string name;
 
 
-    int xPosition, yPosition;
+    Position currentPosition;
 
 
 public:
 
-    Piece(string name, bool color, int xPosition, int yPosition);
+    Piece(string name, bool color, Position currentPosition);
 
-    virtual vector<pair<int, int>> pathTo(int xPosition, int yPosition) const;
+    virtual vector<Position> pathTo(int xPosition, int yPosition) const = 0;
 
     bool getColor () const;
 
-    int getXPosition () const;
+    Position getXPosition () const;
 
-    int getYPosition () const;
-
-    void setPosition (int x, int y);
+    void setPosition (Position posistion);
 
     string getName() const;
 };

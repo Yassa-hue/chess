@@ -24,9 +24,9 @@ class KingPiece : public Piece {
 
 public:
 
-    KingPiece(bool color, int xPosition, int yPosition);
+    KingPiece(bool color, Position Position);
 
-    vector<pair<int, int>> pathTo(int finalXPosition, int finalYPosition) const;
+    vector<Position> pathTo(Position finalPosition) const;
 };
 
 

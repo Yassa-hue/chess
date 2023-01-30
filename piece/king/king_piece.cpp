@@ -3,9 +3,9 @@
 
 #include "king_piece.h"
 
-KingPiece::KingPiece(bool color, int xPosition, int yPosition) 
+KingPiece::KingPiece(bool color, Position Position)
     // Set the name of the piece according to the color.
-    : Piece((color == WHIGHT_COLOR ? "Whight king" : "Black king"), color, xPosition, yPosition){
+    : Piece((color == WHIGHT_COLOR ? "Whight king" : "Black king"), color, Position){
 
 }
 
@@ -18,14 +18,14 @@ KingPiece::KingPiece(bool color, int xPosition, int yPosition)
     If the path is invalid according to the King's move it returns an empty path.
 
 */
-vector<pair<int, int>> KingPiece::pathTo(int finalXPosition, int finalYPosition) const {
-    vector<pair<int, int>> resultPath;
+vector<Position> KingPiece::pathTo(Position finalPosition) const {
+    vector<Position> resultPath;
     
 
-    if (abs(finalXPosition - xPosition <= 1)
-        && abs(finalYPosition - xPosition <= 1)
-        && (finalXPosition != xPosition || finalYPosition != yPosition)) {
-            resultPath.push_back({finalXPosition, finalYPosition});
+    if (abs(finalPosition.x - currentPosition.x) <= 1
+        && abs(finalPosition.y - currentPosition.y) <= 1
+        && (finalPosition.x != currentPosition.x || finalPosition.y != currentPosition.y)) {
+            resultPath.push_back(finalPosition);
         }
 
 
