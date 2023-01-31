@@ -19,17 +19,16 @@
 using namespace std;
 
 
+template <typename TestInput, typename TestOutput>
 
-template <typename TestOutput>
-
-class SuccessfullTest : public Test {
+class SuccessfullTest : public Test<TestInput> {
 protected:
     TestOutput testOutput;
 
 
 public:
     SuccessfullTest(string name, int id, TestInput testInput, TestOutput testOutput) 
-        : Test(name, id, testInput), testOutput(testOutput) {
+        : Test<TestInput>(name, id, testInput), testOutput(testOutput) {
 
     }
 
