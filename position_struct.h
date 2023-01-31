@@ -40,12 +40,12 @@ public:
 
 
 
-    bool isOutOfBoard() {
+    bool isOutOfBoard() const {
         return (x < 0 || x >= BOARD_SIZE || y < 0 || y >= BOARD_SIZE);
     }
 
 
-    PositionRelativeDirection getDirectionFrom(Position pivotPosition) {
+    PositionRelativeDirection getDirectionFrom(Position pivotPosition) const {
         if (x == pivotPosition.x && y < pivotPosition.y) {
             return RIGHT_RELATIVE_DIRECTION;
         }

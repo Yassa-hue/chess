@@ -28,6 +28,10 @@ using namespace std;
 
 
 
+typedef vector<Position> PiecePath;
+
+
+
 
 
 class Piece {
@@ -46,7 +50,7 @@ public:
 
     Piece(string name, bool color, Position currentPosition);
 
-    virtual vector<Position> pathTo(Position finalPosition) const = 0;
+    virtual PiecePath pathTo(Position finalPosition) const = 0;
 
     bool getColor () const;
 

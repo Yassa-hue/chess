@@ -18,14 +18,14 @@ QueenPiece::QueenPiece(bool color, Position Position)
     If the path is invalid according to the King's move it returns an empty path.
 
 */
-vector<Position> QueenPiece::pathTo(Position finalPosition) const {
+PiecePath QueenPiece::pathTo(Position finalPosition) const {
 
 
-    vector <Position> path;
-
+    PiecePath path;
 
     PositionRelativeDirection finalPositionRelativeDirection 
-                    = finalPosition.getDirectionFrom(currentPosition);
+                    = currentPosition.getDirectionFrom(finalPosition);
+
 
     if (finalPositionRelativeDirection == INVALID_RELATIVE_DIRECTION) {
         return {};

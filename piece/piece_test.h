@@ -24,9 +24,11 @@ class TestRunner {
 private:
     bool isSameOutput(PieceTestCaseOutput testCaseOutput
         , PieceTestCaseOutput &testCaseRunOutput) {
+
         if (testCaseOutput.size() != testCaseRunOutput.size()) {
             return false;
         }
+
 
         for (int i = 0; i < testCaseRunOutput.size(); i++) {
             if (testCaseOutput[i] != testCaseRunOutput[i]) {
