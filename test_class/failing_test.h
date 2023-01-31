@@ -21,9 +21,9 @@ using namespace std;
 
 template <typename TestInput>
 
-class FallingTest : public Test{
+class FallingTest : public Test <TestInput>{
 public:
-    FallingTest(string name, int id, TestInput testInput) : Test(name, id, testInput) {
+    FallingTest(string name, int id, TestInput testInput) : Test<TestInput>(name, id, testInput) {
         
     }
 

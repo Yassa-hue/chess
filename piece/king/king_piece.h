@@ -9,6 +9,13 @@
 #include "../piece.h"
 
 
+// Board diminsion
+
+#define BOARD_FIRST_X 0
+#define BOARD_LAST_X 7
+#define BOARD_FIRST_Y 0
+#define BOARD_LAST_Y 7
+
 
 
 
@@ -17,9 +24,9 @@ class KingPiece : public Piece {
 
 public:
 
-    KingPiece(bool color, int xPosition, int yPosition);
+    KingPiece(bool color, Position Position);
 
-    bool isValidMove(int toXPosition, int toYPosition);
+    vector<Position> pathTo(Position finalPosition) const;
 };
 
 
