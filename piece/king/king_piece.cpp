@@ -5,7 +5,7 @@
 
 KingPiece::KingPiece(bool color, Position Position)
     // Set the name of the piece according to the color.
-    : Piece((color == WHIGHT_COLOR ? "Whight king" : "Black king"), color, Position){
+    : Piece("King", color, Position){
 
 }
 
@@ -14,7 +14,7 @@ KingPiece::KingPiece(bool color, Position Position)
 
 /*
 
-    This function returns the path to the final point (x, y) if possible.
+    This function returns the path to the final point if possible.
     If the path is invalid according to the King's move it returns an empty path.
 
 */
