@@ -22,13 +22,23 @@ vector<Position> KingPiece::pathTo(Position finalPosition) const {
     vector<Position> resultPath;
     
 
-    if (abs(finalPosition.x - currentPosition.x) <= 1
-        && abs(finalPosition.y - currentPosition.y) <= 1
-        && (finalPosition.x != currentPosition.x || finalPosition.y != currentPosition.y)) {
-            resultPath.push_back(finalPosition);
-        }
+    PositionRelativeDirection finalPositionRelativeDirection 
+                    = currentPosition.getDirectionFrom(finalPosition);
+    
+    if (finalPositionRelativeDirection == INVALID_RELATIVE_DIRECTION) {
+        return {};
+    }
+
+    Position nextPathNode = Position(currentPosition);
+    nextPathNode.moveOneStepInDirection(finalPositionRelativeDirection);
+
+    resultPath.push_back(nextPathNode);
+
+    if (nextPathNode == finalPosition) {
+        return resultPath;
+    }
 
 
-    return resultPath;
+    return {};
 }
 
