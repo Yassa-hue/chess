@@ -9,14 +9,13 @@
 class Square {
 private:
     Piece *piece;
-    int xPosition, yPosition;
+
+    Position position;
 public:
 
-    Square(int xPosition, int yPosition);
+    Square(Position position);
 
-    int getXPosition () const;
-
-    int getYPosition () const;
+    Position getPosition () const;
 
     void setPiece(Piece *piece);
 
