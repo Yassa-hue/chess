@@ -1,5 +1,12 @@
 
 
+
+
+
+#ifndef POSITION_CLASS_DECLARARION
+#define POSITION_CLASS_DECLARARION
+
+
 #define BOARD_SIZE 8
 
 
@@ -95,3 +102,6 @@ public:
     
     
 };
+
+
+#endif // POSITION_CLASS_DECLARARION
