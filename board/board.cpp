@@ -61,18 +61,8 @@ bool Board::validMove(Position startPosition, Position destinationPosition) cons
                     ->pathTo(destinationPosition);
 
     
-    if (!validPath(path)) {
+    if (!path.isValid(this)) {
         return false;
-    }
-
-    string pieceName = getSquare(startPosition)
-                    ->getPiece()
-                    ->getName();
-
-    if (pieceName == "Pawn") {
-        if (!pawnValidPath(startPosition, path)) {
-            return false;
-        }
     }
 
     return true;
@@ -101,72 +91,6 @@ bool Board::validPositions(Position startPosition, Position destinationPosition)
     }
 
     return true;
-}
-
-
-
-
-
-
-
-
-bool Board::validPath(const PiecePath &piecePath) const {
-    // if the path is empty it is invlid
-    if (piecePath.empty()) { 
-        return false;
-    }
-
-
-    if (pathIsBlocked(piecePath)) {
-        return false;
-    }
-
-    return true;
-}
-
-
-
-
-
-
-bool Board::pathIsBlocked(const PiecePath &path) const {
-
-    for (size_t i = 0; i+1 < path.size(); i++) {
-        if (getSquare(path[i])->isBusy()) {
-            return false;
-        }
-    }
-    
-    if (!getSquare(path.back())->isBusy()
-        && !existOpponentPieceAtEndOfPath(path)) {
-        return false;
-    }
-
-    return true;
-
-}
-
-
-
-bool Board::existOpponentPieceAtEndOfPath(const PiecePath &path) const {
-    Piece *endOfPathPiece = getSquare(path.back())->getPiece(); 
-    
-    if (endOfPathPiece == nullptr) {
-        return false;
-    }
-
-    return (endOfPathPiece->getColor() != currentPlayerColor);
-}
-
-
-
-
-bool Board::pawnValidPath(const Position &startPosition, const PiecePath &pawnPath) const {
-    if (startPosition.y == pawnPath.front().y) {
-        return true;
-    }
-
-    return existOpponentPieceAtEndOfPath(pawnPath);
 }
 
 

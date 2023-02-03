@@ -21,14 +21,14 @@ QueenPiece::QueenPiece(bool color, Position Position)
 PiecePath QueenPiece::pathTo(Position finalPosition) const {
 
 
-    PiecePath path;
+    PiecePath path(currentPosition);
 
     PositionRelativeDirection finalPositionRelativeDirection 
                     = currentPosition.getDirectionFrom(finalPosition);
 
 
     if (finalPositionRelativeDirection == INVALID_RELATIVE_DIRECTION) {
-        return {};
+        return path;
     }
     
 
@@ -37,7 +37,7 @@ PiecePath QueenPiece::pathTo(Position finalPosition) const {
 
 
     while (!nextPathNode.isOutOfBoard()) {
-        path.push_back(nextPathNode);
+        path += nextPathNode;
 
         if (nextPathNode == finalPosition) {
             return path;
@@ -47,7 +47,7 @@ PiecePath QueenPiece::pathTo(Position finalPosition) const {
     }
 
     // returning empty path
-    return {};
+    return PiecePath(currentPosition);
 }
 
 

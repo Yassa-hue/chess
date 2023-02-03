@@ -29,14 +29,6 @@ private:
 
     bool validPositions(Position startPosition, Position destinationPosition) const ;
 
-    bool validPath(const PiecePath &piecePath) const ;
-
-    bool pathIsBlocked(const PiecePath &path) const;
-
-    bool existOpponentPieceAtEndOfPath(const PiecePath &path) const ;
-
-    bool pawnValidPath(const Position &startPosition, const PiecePath &pawnPath) const;
-
     bool kingDieIfPieceMoved(const Position &movingPiecePosition) const ;
 
     bool kingIsThreated() const;
@@ -44,9 +36,6 @@ private:
     void switchPlayerTurn();
 
     void updateKingPosition(const Position &newPosition);
-
-    Square *getSquare(const Position &squarePosition) const;
-
 
 
 public:
@@ -56,6 +45,10 @@ public:
     Piece* movePiece(Position startPosition, Position destinationPosition);
 
     void setPiece(Piece *piece);
+
+    Square *getSquare(const Position &squarePosition) const;
+
+    const int getCurrentPlayerColor() const; 
 };
 
 
