@@ -27,7 +27,7 @@ public:
 
     BishopPiece(bool color, Position Position);
 
-    vector<Position> pathTo(Position finalPosition) const;
+    PiecePath pathTo(Position finalPosition) const;
 };
 
 

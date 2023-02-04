@@ -26,7 +26,7 @@ bool BishopPiece::isValidRelativeDirection(PositionRelativeDirection relativeDir
     If the path is invalid according to the King's move it returns an empty path.
 
 */
-vector<Position> BishopPiece::pathTo(Position finalPosition) const {
+PiecePath BishopPiece::pathTo(Position finalPosition) const {
     PiecePath path;
     
 
