@@ -21,7 +21,6 @@
 #include <iostream>
 #include <vector>
 #include "../position_struct.h"
-#include "../piece_path/piece_path.h"
 
 
 using namespace std;
@@ -29,7 +28,7 @@ using namespace std;
 
 
 
-// typedef vector<Position> PiecePath;
+typedef vector<Position> PiecePath;
 
 
 
