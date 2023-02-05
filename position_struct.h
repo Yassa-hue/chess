@@ -1,5 +1,8 @@
 
 
+#ifndef POSITION_CLASS_DECLARATION
+#define POSITION_CLASS_DECLARATION
+
 #define BOARD_SIZE 8
 
 
@@ -95,3 +98,7 @@ public:
     
     
 };
+
+
+
+#endif //POSITION_CLASS_DECLARATION
