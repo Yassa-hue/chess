@@ -138,7 +138,7 @@ bool Board::pathIsBlocked(const PiecePath &path) const {
     }
     
     if (!getSquare(path.back())->isBusy()
-        && !existOpponentPieceAtEndOfPath(path)) {
+        && !existOpponentPieceAtEndOfPath(path.back())) {
         return false;
     }
 
@@ -148,9 +148,15 @@ bool Board::pathIsBlocked(const PiecePath &path) const {
 
 
 
-bool Board::existOpponentPieceAtEndOfPath(const PiecePath &path) const {
-    Piece *endOfPathPiece = getSquare(path.back())->getPiece(); 
+bool Board::existOpponentPieceAtEndOfPath(const Position &endOfPath) const {
+    Square *endOfPathSquare = getSquare(endOfPath);
     
+    if (!endOfPathSquare->isBusy()) {
+        return false;
+    }
+
+    Piece *endOfPathPiece = endOfPathSquare->getPiece();
+
     if (endOfPathPiece == nullptr) {
         return false;
     }
@@ -166,7 +172,7 @@ bool Board::pawnValidPath(const Position &startPosition, const PiecePath &pawnPa
         return true;
     }
 
-    return existOpponentPieceAtEndOfPath(pawnPath);
+    return existOpponentPieceAtEndOfPath(pawnPath.back());
 }
 
 

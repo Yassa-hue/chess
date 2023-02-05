@@ -8,6 +8,8 @@
 #include "../position_struct.h"
 #include "../game_exception/game_exception.h"
 
+class BoardUnitTest;
+
 #define NO_CHECK 1
 #define CHECK 2
 #define CHECK_MATE 3
@@ -33,7 +35,7 @@ private:
 
     bool pathIsBlocked(const PiecePath &path) const;
 
-    bool existOpponentPieceAtEndOfPath(const PiecePath &path) const ;
+    bool existOpponentPieceAtEndOfPath(const Position &endOfPath) const ;
 
     bool pawnValidPath(const Position &startPosition, const PiecePath &pawnPath) const;
 
@@ -50,6 +52,8 @@ private:
 
 
 public:
+
+    friend BoardUnitTest;
 
     Board();
     
