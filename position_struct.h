@@ -1,13 +1,15 @@
 
 
+#ifndef POSITION_CLASS_DECLARATION
+#define POSITION_CLASS_DECLARATION
 
-
-
-#ifndef POSITION_CLASS_DECLARARION
-#define POSITION_CLASS_DECLARARION
-
+// Board diminsion
 
 #define BOARD_SIZE 8
+#define BOARD_FIRST_X 0
+#define BOARD_LAST_X 7
+#define BOARD_FIRST_Y 0
+#define BOARD_LAST_Y 7
 
 
 
@@ -102,6 +104,7 @@ public:
     
     
 };
+
 
 
 #endif // POSITION_CLASS_DECLARARION
