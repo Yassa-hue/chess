@@ -23,8 +23,8 @@
 #include "../position_struct.h"
 
 
-
 using namespace std;
+
 
 
 

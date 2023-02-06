@@ -4,6 +4,7 @@
 #define POSITION_CLASS_DECLARATION
 
 // Board diminsion
+
 #define BOARD_SIZE 8
 #define BOARD_FIRST_X 0
 #define BOARD_LAST_X 7
@@ -106,4 +107,4 @@ public:
 
 
 
-#endif //POSITION_CLASS_DECLARATION
+#endif // POSITION_CLASS_DECLARARION

@@ -28,7 +28,7 @@ PiecePath QueenPiece::pathTo(Position finalPosition) const {
 
 
     if (finalPositionRelativeDirection == INVALID_RELATIVE_DIRECTION) {
-        return {};
+        return path;
     }
     
 
@@ -47,7 +47,7 @@ PiecePath QueenPiece::pathTo(Position finalPosition) const {
     }
 
     // returning empty path
-    return {};
+    return PiecePath();
 }
 
 

@@ -1,7 +1,13 @@
 {
     "files.associations": {
         "*.embeddedhtml": "html",
-        "iosfwd": "cpp"
+        "iosfwd": "cpp",
+        "bitset": "cpp",
+        "ios": "cpp",
+        "locale": "cpp",
+        "string": "cpp",
+        "type_traits": "cpp",
+        "__config": "cpp"
     },
     "workbench.tree.indent": 4
 }
