@@ -1,3 +1,0 @@
-/Users/yassa/CLionProjects/chess_game/piece/rock/build/CMakeFiles/rock_test.dir
-/Users/yassa/CLionProjects/chess_game/piece/rock/build/CMakeFiles/edit_cache.dir
-/Users/yassa/CLionProjects/chess_game/piece/rock/build/CMakeFiles/rebuild_cache.dir
