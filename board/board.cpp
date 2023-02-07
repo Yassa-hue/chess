@@ -16,16 +16,38 @@ Board::Board() : currentPlayerColor(WHIGHT_COLOR),
 
 
 
-Piece* Board::movePiece(Position startPosition, Position destinationPosition) {
+Piece* Board::applyMove(Position startPosition, Position destinationPosition) {
 
     if (!validMove(startPosition, destinationPosition)) {
         throw GameException("Invalid move");
     }
 
-    if (kingDieIfPieceMoved(startPosition)) {
-        throw GameException("The king will die if this piece moves");
-    }
+
+    /*
+        try moving
+        check if king is going to die
+        if so undo the move and throw error
+        else return
+    */
+
+
+    Piece *deadPiece = movePiece(startPosition, destinationPosition);
     
+
+    if (kingIsThreated()) {
+        movePiece(destinationPosition, startPosition);
+        throw GameException("The king will die if this move is applied");
+    }
+
+    switchPlayerTurn();
+
+    return deadPiece;
+}
+
+
+
+
+Piece* Board::movePiece(Position startPosition, Position destinationPosition) {
     Square *startSquare = getSquare(startPosition), 
             *destinationSquare = getSquare(destinationPosition); 
 
@@ -40,8 +62,6 @@ Piece* Board::movePiece(Position startPosition, Position destinationPosition) {
     if (movingPiece->getName() == "King") {
         updateKingPosition(destinationPosition);
     }
-
-    switchPlayerTurn();
 
     return deadPiece;
 }
@@ -177,23 +197,6 @@ bool Board::pawnValidPath(const Position &startPosition, const PiecePath &pawnPa
 
 
 
-
-
-bool Board::kingDieIfPieceMoved(const Position &movingPiecePosition) const {
-    
-    Square *pieceSquare = getSquare(movingPiecePosition);
-
-    Piece *movingPiece = pieceSquare->getPiece();
-    
-    pieceSquare->deletePiece();
-
-    bool kingWouldDie = kingIsThreated();
-
-    pieceSquare->setPiece(movingPiece);
-
-    return kingWouldDie;
-
-}
 
 
 

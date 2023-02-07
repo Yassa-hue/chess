@@ -38,10 +38,6 @@ typedef SuccessfullTest<void, bool> kingIsThreatedFuncUnitTestCase;
 
 
 
-typedef SuccessfullTest<Position, bool> kingDieIfPieceMovedFuncUnitTestCase;
-
-
-
 struct validMoveFuncUnitTestInput {
 public:
     Position startPosition, destinationPosition;
@@ -80,10 +76,6 @@ public:
 
     void kingIsThreatedFuncTest(Board *board,
                 vector <kingIsThreatedFuncUnitTestCase> *testCases);
-
-    
-    void kingDieIfPieceMovedFuncTest(Board *board,
-                vector <kingDieIfPieceMovedFuncUnitTestCase> *testCases);
 
 
     void validMoveFuncTest(Board *board,

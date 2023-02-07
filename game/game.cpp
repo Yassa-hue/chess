@@ -125,7 +125,7 @@ void Game::play() {
         // apply move
         try {
 
-            Piece *deadPiece = board->movePiece(startPosition, destinationPosition);
+            Piece *deadPiece = board->applyMove(startPosition, destinationPosition);
 
             if (deadPiece != nullptr) {
                 int deadPieceColor = deadPiece->getColor();
@@ -153,7 +153,7 @@ void Game::play() {
             if (defeatedPlayerColor == WHIGHT_COLOR) {
                 cout << "Black player wins" << endl;
             } else {
-                cout << "Black player wins" << endl;
+                cout << "White player wins" << endl;
             }
 
             break;

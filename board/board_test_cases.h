@@ -27,8 +27,4 @@ vector <kingIsThreatedFuncUnitTestCase> *kingIsThreatedFuncTestCases;
 
 
 
-vector <kingDieIfPieceMovedFuncUnitTestCase> *kingDieIfPieceMovedFunTestCases;
-
-
-
 vector <validMoveFuncUnitTestCase> *validMoveFuncTestCases;

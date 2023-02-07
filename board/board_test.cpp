@@ -102,19 +102,6 @@ void BoardUnitTest::kingIsThreatedFuncTest(Board *board,
     }
 }
 
-
-void BoardUnitTest::kingDieIfPieceMovedFuncTest(Board *board,
-                vector <kingDieIfPieceMovedFuncUnitTestCase> *testCases) {
-    for (kingDieIfPieceMovedFuncUnitTestCase &testCase : *testCases) {
-
-        bool testCaseRunOutput = board
-                                ->kingDieIfPieceMoved(
-                                    testCase.getTestInput());
-
-        printTestResult(testCaseRunOutput, testCase);
-    }
-}
-
 void BoardUnitTest::validMoveFuncTest(Board *board,
                 vector <validMoveFuncUnitTestCase> *testCases) {
     for (validMoveFuncUnitTestCase &testCase : *testCases) {

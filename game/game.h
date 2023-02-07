@@ -55,6 +55,7 @@ private:
 
     vector <Piece*> whitePieces, blackPieces, deadBlackPieces, deadWhitePieces;
 
+
     void createPieces();
 
     void putPiecesInBoard();

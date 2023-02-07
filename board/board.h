@@ -39,7 +39,7 @@ private:
 
     bool pawnValidPath(const Position &startPosition, const PiecePath &pawnPath) const;
 
-    bool kingDieIfPieceMoved(const Position &movingPiecePosition) const ;
+    Piece* movePiece(Position startPosition, Position destinationPosition);
 
     bool kingIsThreated() const;
 
@@ -57,7 +57,7 @@ public:
 
     Board();
     
-    Piece* movePiece(Position startPosition, Position destinationPosition);
+    Piece* applyMove(Position startPosition, Position destinationPosition);
 
     void setPiece(Piece *piece);
 
