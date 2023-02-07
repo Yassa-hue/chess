@@ -42,7 +42,7 @@ public:
     void runTests (vector<PieceTestCase> &testCases , bool color = WHIGHT_COLOR) {
 
         for (PieceTestCase &testCase : testCases) {
-            PieceClass *piece = new PieceClass(WHIGHT_COLOR, testCase.getTestInput().initialPosintion);
+            PieceClass *piece = new PieceClass(color, testCase.getTestInput().initialPosintion);
             PieceTestCaseOutput testCaseRunOutput = piece->pathTo(testCase.getTestInput().finalPosition);
             if (isSameOutput(testCase.getTestOutput(), testCaseRunOutput)) {
                 cout << "[Test Passed] ";
