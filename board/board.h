@@ -25,9 +25,9 @@ private:
 
     vector <vector <Square *>> board;
 
-    bool validMove(Position startPosition, Position destinationPosition) const;
+    bool validMove(Position startPosition, Position destinationPosition, int movingPlayerColor) const;
 
-    bool validPositions(Position startPosition, Position destinationPosition) const ;
+    bool validPositions(Position startPosition, Position destinationPosition, int movingPlayerColor) const ;
 
     bool validPath(const PiecePath &piecePath) const ;
 

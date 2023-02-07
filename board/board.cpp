@@ -18,7 +18,7 @@ Board::Board() : currentPlayerColor(WHIGHT_COLOR),
 
 Piece* Board::applyMove(Position startPosition, Position destinationPosition) {
 
-    if (!validMove(startPosition, destinationPosition)) {
+    if (!validMove(startPosition, destinationPosition, currentPlayerColor)) {
         throw GameException("Invalid move");
     }
 
@@ -71,8 +71,8 @@ Piece* Board::movePiece(Position startPosition, Position destinationPosition) {
 
 
 
-bool Board::validMove(Position startPosition, Position destinationPosition) const {
-    if (!validPositions(startPosition, destinationPosition)) {
+bool Board::validMove(Position startPosition, Position destinationPosition, int movingPlayerColor) const {
+    if (!validPositions(startPosition, destinationPosition, movingPlayerColor)) {
         return false;
     }
 
@@ -101,7 +101,7 @@ bool Board::validMove(Position startPosition, Position destinationPosition) cons
 
 
 
-bool Board::validPositions(Position startPosition, Position destinationPosition) const {
+bool Board::validPositions(Position startPosition, Position destinationPosition, int movingPlayerColor) const {
     if (startPosition.isOutOfBoard()) {
         return false;
     }
@@ -116,7 +116,7 @@ bool Board::validPositions(Position startPosition, Position destinationPosition)
 
     Piece *movingPiece = getSquare(startPosition)->getPiece();
 
-    if (movingPiece->getColor() != currentPlayerColor) {
+    if (movingPiece->getColor() != movingPlayerColor) {
         return false;
     }
 
@@ -206,6 +206,12 @@ bool Board::kingIsThreated () const {
             whiteKingCurrentPosition 
             : blackKingCurrentPosition);
 
+    
+    int opponentPlayerColor = 
+        (currentPlayerColor == WHIGHT_COLOR ? 
+            BLACK_COLOR 
+            : WHIGHT_COLOR);
+
 
     for (size_t x = 0; x < BOARD_SIZE; x++) {
         for (size_t y = 0; y < BOARD_SIZE; y++) {
@@ -220,7 +226,7 @@ bool Board::kingIsThreated () const {
                 continue;
             }
 
-            if (!validMove(threatingPosition, currentKingPosition)) {
+            if (!validMove(threatingPosition, currentKingPosition, opponentPlayerColor)) {
                 continue;
             }
 
@@ -301,4 +307,43 @@ void Board::printBoard() {
     }
     
     
+}
+
+
+
+
+
+bool Board::currentPlayerIsCheckMated() {
+
+    if (!kingIsThreated()) {
+        return false;
+    }
+
+    Position startPosition(0, 0);
+
+    while (!startPosition.isOutOfBoard()) {
+        Position destinationPosition(0, 0);
+
+        while (!destinationPosition.isOutOfBoard()) {
+            if (!validMove(startPosition, destinationPosition, currentPlayerColor)) {
+                continue;
+            }
+
+            movePiece(startPosition, destinationPosition);
+
+            bool kingIsDead = kingIsThreated();
+
+            movePiece(destinationPosition, startPosition);
+
+            if (kingIsDead) {
+                return true;
+            }
+
+            ++destinationPosition;
+        }
+        
+        ++startPosition;
+    }
+    
+    return false;
 }
