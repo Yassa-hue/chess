@@ -26,8 +26,8 @@ PiecePath KnightPiece::pathTo(Position finalPosition) const {
     int verticalMove[] = {1,-1,1,-1,2,-2,2,-2};
 
     for(int move = 0; move < POSSIBLE_VALID_MOVES; move++){
-        int newXPosition = getXPosition().x + horizontalMove[move];
-        int newYPosition = getXPosition().y + verticalMove[move];
+        int newXPosition = getPosition().x + horizontalMove[move];
+        int newYPosition = getPosition().y + verticalMove[move];
         Position newPosition(newXPosition , newYPosition);
         if(newPosition == finalPosition) return {finalPosition};
     }

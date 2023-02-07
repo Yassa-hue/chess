@@ -283,7 +283,7 @@ void Board::printBoard() {
     for (char yCharCoordinate = 'A'; yCharCoordinate <= 'G'; yCharCoordinate++) {
         cout << yCharCoordinate << ' ';
     }
-    cout << '\n\n';
+    cout << "\n\n";
 
     for (int xCoordinate = 0; xCoordinate < BOARD_SIZE; xCoordinate++) {
         cout << xCoordinate << "  ";
@@ -346,4 +346,11 @@ bool Board::currentPlayerIsCheckMated() {
     }
     
     return false;
+}
+
+
+
+void Board::setPiece(Piece *piece) {
+    getSquare(piece->getPosition())
+    ->setPiece(piece);
 }
