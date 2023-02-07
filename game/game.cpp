@@ -8,6 +8,9 @@ Game::Game () {
     blackPieces = vector<Piece*> ();
     deadWhitePieces = vector<Piece*> ();
     deadBlackPieces = vector<Piece*> ();
+
+    createPieces();
+    putPiecesInBoard();
 }
 
 

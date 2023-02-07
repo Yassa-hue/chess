@@ -60,14 +60,14 @@ private:
 
     void putPiecesInBoard();
 
-    void play();
-
     void printDeadPieces();
 
     int convertYCoordinateToInt(char yCoordinate);
 public:
 
     Game();
+    
+    void play();
 
     ~Game();
 
