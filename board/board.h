@@ -60,6 +60,12 @@ public:
     Piece* movePiece(Position startPosition, Position destinationPosition);
 
     void setPiece(Piece *piece);
+
+    void printBoard();
+
+    bool currentPlayerIsCheckMated();
+
+    int getCurrentPlayerColor();
 };
 
 
