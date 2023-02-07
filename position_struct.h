@@ -34,7 +34,7 @@ class Position {
 public:
     int x, y;
     
-    Position(int x, int y) : x(x), y(y) {
+    Position(int x = 0, int y = 0) : x(x), y(y) {
 
     }
 
@@ -45,6 +45,18 @@ public:
 
     bool operator!= (Position p) {
         return !this->operator==(p);
+    }
+
+
+    Position& operator++ () {
+        if (y+1 == BOARD_SIZE) {
+            x ++;
+            y = 0;
+        } else {
+            y++;
+        }
+
+        return *this;
     }
 
 

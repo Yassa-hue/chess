@@ -10,9 +10,7 @@
 
 class BoardUnitTest;
 
-#define NO_CHECK 1
-#define CHECK 2
-#define CHECK_MATE 3
+#define EMPTY_SQUARE_ABBREVIATION '.'
 
 
 #define WHITE_KING_INITIAL_POSITION Position(0, 3)
@@ -27,9 +25,9 @@ private:
 
     vector <vector <Square *>> board;
 
-    bool validMove(Position startPosition, Position destinationPosition) const;
+    bool validMove(Position startPosition, Position destinationPosition, int movingPlayerColor) const;
 
-    bool validPositions(Position startPosition, Position destinationPosition) const ;
+    bool validPositions(Position startPosition, Position destinationPosition, int movingPlayerColor) const ;
 
     bool validPath(const PiecePath &piecePath) const ;
 
@@ -39,7 +37,7 @@ private:
 
     bool pawnValidPath(const Position &startPosition, const PiecePath &pawnPath) const;
 
-    bool kingDieIfPieceMoved(const Position &movingPiecePosition) const ;
+    Piece* movePiece(Position startPosition, Position destinationPosition);
 
     bool kingIsThreated() const;
 
@@ -57,9 +55,15 @@ public:
 
     Board();
     
-    Piece* movePiece(Position startPosition, Position destinationPosition);
+    Piece* applyMove(Position startPosition, Position destinationPosition);
 
     void setPiece(Piece *piece);
+
+    void printBoard();
+
+    bool currentPlayerIsCheckMated();
+
+    int getCurrentPlayerColor() const;
 };
 
 
