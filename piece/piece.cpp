@@ -16,7 +16,7 @@ bool Piece::getColor () const {
 }
 
 
-Position Piece::getXPosition () const {
+Position Piece::getPosition () const {
     return currentPosition;
 }
 
@@ -28,4 +28,16 @@ void Piece::setPosition (Position posistion) {
 
 string Piece::getName() const {
     return name;
+}
+
+
+char Piece::getPrintAbbreviation() const {
+    char printAbbreviation = getName().front();
+
+    // if the piece is black convert from capital to small
+    if (getColor() == BLACK_COLOR) {
+        printAbbreviation = printAbbreviation - 'A' + 'a';
+    }
+
+    return printAbbreviation;
 }

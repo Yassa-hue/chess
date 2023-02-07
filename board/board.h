@@ -10,9 +10,7 @@
 
 class BoardUnitTest;
 
-#define NO_CHECK 1
-#define CHECK 2
-#define CHECK_MATE 3
+#define EMPTY_SQUARE_ABBREVIATION '.'
 
 
 #define WHITE_KING_INITIAL_POSITION Position(0, 3)
@@ -65,7 +63,7 @@ public:
 
     bool currentPlayerIsCheckMated();
 
-    int getCurrentPlayerColor();
+    int getCurrentPlayerColor() const;
 };
 
 

@@ -54,11 +54,13 @@ public:
 
     bool getColor () const;
 
-    Position getXPosition () const;
+    Position getPosition () const;
 
     void setPosition (Position posistion);
 
     string getName() const;
+
+    char getPrintAbbreviation() const;
 };
 
 

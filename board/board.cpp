@@ -262,3 +262,43 @@ void Board::updateKingPosition(const Position &newPosition) {
 Square *Board::getSquare(const Position &squarePosition) const {
     return board[squarePosition.x][squarePosition.y];
 }
+
+
+
+
+int Board::getCurrentPlayerColor() const {
+    return currentPlayerColor;
+}
+
+
+void Board::printBoard() {
+    // print y coordinates in char
+    cout << "   ";
+    for (char yCharCoordinate = 'A'; yCharCoordinate <= 'G'; yCharCoordinate++) {
+        cout << yCharCoordinate << ' ';
+    }
+    cout << '\n\n';
+
+    for (int xCoordinate = 0; xCoordinate < BOARD_SIZE; xCoordinate++) {
+        cout << xCoordinate << "  ";
+        for (int yCoordinate = 0; yCoordinate < BOARD_SIZE; yCoordinate++) {
+            
+
+            Square *square = getSquare(Position(xCoordinate, yCoordinate));
+
+            if (square->isBusy()) {
+                cout << EMPTY_SQUARE_ABBREVIATION << ' ';
+                continue;
+            }
+
+            Piece *piece = square->getPiece();
+
+            cout << piece->getPrintAbbreviation() << ' ';
+        }
+
+        cout << endl;
+        
+    }
+    
+    
+}
