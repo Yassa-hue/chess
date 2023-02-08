@@ -69,6 +69,8 @@ private:
     void printDeadPieces();
 
     int convertYCoordinateToInt(char yCoordinate);
+
+    void clearScreen() const;
 public:
 
     Game();

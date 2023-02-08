@@ -326,7 +326,6 @@ void Board::printBoard() {
 
 
 bool Board::currentPlayerIsCheckMated() {
-    cout << "errrrr11" << endl;
     if (!kingIsThreated()) {
         return false;
     }
