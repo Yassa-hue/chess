@@ -6,8 +6,7 @@
 #include "square.h"
 
 
-Square::Square(Position position) : position(position) {
-
+Square::Square(Position position) : position(position), piece(nullptr){
 }
 
 
@@ -39,5 +38,5 @@ Piece *Square::getPiece() const {
 
 
 bool Square::isBusy() const {
-    return (piece == nullptr);
+    return (piece != nullptr);
 }

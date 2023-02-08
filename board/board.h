@@ -8,7 +8,9 @@
 #include "../position_struct.h"
 #include "../game_exception/game_exception.h"
 
-class BoardUnitTest;
+class BoardUnitTest {
+
+};
 
 #define EMPTY_SQUARE_ABBREVIATION '.'
 
@@ -47,6 +49,7 @@ private:
 
     Square *getSquare(const Position &squarePosition) const;
 
+    void createBoardSquares ();
 
 
 public:
@@ -64,6 +67,8 @@ public:
     bool currentPlayerIsCheckMated();
 
     int getCurrentPlayerColor() const;
+
+    ~Board();
 };
 
 

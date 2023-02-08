@@ -61,6 +61,8 @@ public:
     string getName() const;
 
     char getPrintAbbreviation() const;
+
+    virtual ~Piece() = default;
 };
 
 

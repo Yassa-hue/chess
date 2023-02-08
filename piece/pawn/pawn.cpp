@@ -22,31 +22,31 @@ PawnPiece::PawnPiece(bool color, Position Position)
 PiecePath PawnPiece::pathTo(Position finalPosition) const {
 
     Position currentPosition = getPosition();
-    if(color == BLACK_COLOR){
+    if(color == WHIGHT_COLOR){
 
         // special case if I'm in the second row
         // you can move 2 steps instead of 1
         if(currentPosition.x == 1){
             if(finalPosition.x == 3 && currentPosition.y == finalPosition.y) return {Position(2 , currentPosition.y) ,finalPosition};
-        }else{
-            if(finalPosition.x == currentPosition.x + 1 && (
-                finalPosition.y == currentPosition.y || 
-                finalPosition.y == currentPosition.y + 1 ||
-                finalPosition.y == currentPosition.y - 1
-            )) return {finalPosition};
         }
+        if(finalPosition.x == currentPosition.x + 1 && (
+            finalPosition.y == currentPosition.y || 
+            finalPosition.y == currentPosition.y + 1 ||
+            finalPosition.y == currentPosition.y - 1
+        ))  return {finalPosition};
+        
     }else{
         // special case if I'm in the second row
         // you can move 2 steps instead of 1
         if(currentPosition.x == 6){
             if(finalPosition.x == 4 && currentPosition.y == finalPosition.y) return {Position(5 , currentPosition.y) ,finalPosition};;
-        }else{
-            if(finalPosition.x == currentPosition.x - 1 && (
+        }
+        if(finalPosition.x == currentPosition.x - 1 && (
             finalPosition.y == currentPosition.y || 
             finalPosition.y == currentPosition.y + 1 ||
             finalPosition.y == currentPosition.y - 1
-            )) return {finalPosition};
-        }
+        )) return {finalPosition};
+        
         
     }
     return {};

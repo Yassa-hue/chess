@@ -15,6 +15,12 @@
 
 
 
+#define SCREEN_SIZE 100
+
+#define EXIT_CODE -1
+
+
+
 #define PAWNS_NUM 8
 #define WHITE_PAWNS_X_COORDINATE 1 
 #define BLACK_PAWNS_X_COORDINATE 6

@@ -12,12 +12,13 @@ Board::Board() : currentPlayerColor(WHIGHT_COLOR),
     whiteKingCurrentPosition(WHITE_KING_INITIAL_POSITION),
     blackKingCurrentPosition(BLACK_KING_INITIAL_POSITION) {
     board = vector <vector <Square *>> (BOARD_SIZE, vector <Square *>(BOARD_SIZE, nullptr));
+    createBoardSquares();
 }
 
 
 
 Piece* Board::applyMove(Position startPosition, Position destinationPosition) {
-
+ 
     if (!validMove(startPosition, destinationPosition, currentPlayerColor)) {
         throw GameException("Invalid move");
     }
@@ -32,7 +33,7 @@ Piece* Board::applyMove(Position startPosition, Position destinationPosition) {
 
 
     Piece *deadPiece = movePiece(startPosition, destinationPosition);
-    
+
 
     if (kingIsThreated()) {
         movePiece(destinationPosition, startPosition);
@@ -102,6 +103,7 @@ bool Board::validMove(Position startPosition, Position destinationPosition, int 
 
 
 bool Board::validPositions(Position startPosition, Position destinationPosition, int movingPlayerColor) const {
+    
     if (startPosition.isOutOfBoard()) {
         return false;
     }
@@ -110,7 +112,8 @@ bool Board::validPositions(Position startPosition, Position destinationPosition,
         return false;
     }
 
-    if (!getSquare(startPosition)->isBusy()) {
+
+    if (!(getSquare(startPosition)->isBusy())) {
         return false;
     }
 
@@ -153,16 +156,17 @@ bool Board::pathIsBlocked(const PiecePath &path) const {
 
     for (size_t i = 0; i+1 < path.size(); i++) {
         if (getSquare(path[i])->isBusy()) {
-            return false;
+            return true;
         }
     }
     
-    if (!getSquare(path.back())->isBusy()
-        && !existOpponentPieceAtEndOfPath(path.back())) {
-        return false;
+    if (getSquare(path.back())->isBusy()) {
+        if (!existOpponentPieceAtEndOfPath(path.back())) {
+            return true;
+        }
     }
 
-    return true;
+    return false;
 
 }
 
@@ -213,18 +217,26 @@ bool Board::kingIsThreated () const {
             : WHIGHT_COLOR);
 
 
+
     for (size_t x = 0; x < BOARD_SIZE; x++) {
         for (size_t y = 0; y < BOARD_SIZE; y++) {
             Position threatingPosition = Position(x, y);
             Square *threatingSquare = getSquare(threatingPosition);
 
+
+            
             if (!threatingSquare->isBusy()) {
                 continue;
             }
 
+            
+
+
             if (threatingSquare->getPiece()->getColor() == currentPlayerColor) {
                 continue;
             }
+
+            
 
             if (!validMove(threatingPosition, currentKingPosition, opponentPlayerColor)) {
                 continue;
@@ -280,7 +292,7 @@ int Board::getCurrentPlayerColor() const {
 void Board::printBoard() {
     // print y coordinates in char
     cout << "   ";
-    for (char yCharCoordinate = 'A'; yCharCoordinate <= 'G'; yCharCoordinate++) {
+    for (char yCharCoordinate = 'A'; yCharCoordinate <= 'H'; yCharCoordinate++) {
         cout << yCharCoordinate << ' ';
     }
     cout << "\n\n";
@@ -292,7 +304,7 @@ void Board::printBoard() {
 
             Square *square = getSquare(Position(xCoordinate, yCoordinate));
 
-            if (square->isBusy()) {
+            if (!square->isBusy()) {
                 cout << EMPTY_SQUARE_ABBREVIATION << ' ';
                 continue;
             }
@@ -314,12 +326,14 @@ void Board::printBoard() {
 
 
 bool Board::currentPlayerIsCheckMated() {
-
+    cout << "errrrr11" << endl;
     if (!kingIsThreated()) {
         return false;
     }
 
     Position startPosition(0, 0);
+
+
 
     while (!startPosition.isOutOfBoard()) {
         Position destinationPosition(0, 0);
@@ -353,4 +367,28 @@ bool Board::currentPlayerIsCheckMated() {
 void Board::setPiece(Piece *piece) {
     getSquare(piece->getPosition())
     ->setPiece(piece);
+}
+
+
+
+
+
+
+void Board::createBoardSquares() {
+    for (size_t i = 0; i < BOARD_SIZE; i++) {
+        for (size_t j = 0; j < BOARD_SIZE; j++) {
+            board[i][j] = new Square(Position(i, j));
+        }
+    }
+}
+
+
+
+
+Board::~Board() {
+    for (size_t i = 0; i < BOARD_SIZE; i++) {
+        for (size_t j = 0; j < BOARD_SIZE; j++) {
+            delete board[i][j];
+        }
+    }
 }
