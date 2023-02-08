@@ -136,7 +136,7 @@ void Game::play() {
         Position startPosition(startX, convertYCoordinateToInt(startY)),
                 destinationPosition(endX, convertYCoordinateToInt(endY));
 
-
+        clearScreen();
 
         // apply move
         try {
@@ -162,26 +162,31 @@ void Game::play() {
 
 
 
-        // // if player wins ends
-        // if (board->currentPlayerIsCheckMated()) {
-        //     int defeatedPlayerColor = board->getCurrentPlayerColor();
-        //     if (defeatedPlayerColor == WHIGHT_COLOR) {
-        //         cout << "Black player wins" << endl;
-        //     } else {
-        //         cout << "White player wins" << endl;
-        //     }
+        // if player wins ends
+        if (board->currentPlayerIsCheckMated()) {
+            int defeatedPlayerColor = board->getCurrentPlayerColor();
+            if (defeatedPlayerColor == WHIGHT_COLOR) {
+                cout << "Black player wins" << endl;
+            } else {
+                cout << "White player wins" << endl;
+            }
 
-        //     break;
-        // }
+            break;
+        }
 
-        // Clear screen
+        
+    }
+    
+    
+}
+
+
+
+
+void Game::clearScreen() const {
         for (size_t i = 0; i < SCREEN_SIZE; i++)
         {
             cout << '\n';
         }
         cout << endl;
-        
-    }
-    
-    
 }
