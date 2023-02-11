@@ -8,9 +8,6 @@
 #include "../position_struct.h"
 #include "../game_exception/game_exception.h"
 
-class BoardUnitTest {
-
-};
 
 #define EMPTY_SQUARE_ABBREVIATION '.'
 
@@ -27,9 +24,9 @@ private:
 
     vector <vector <Square *>> board;
 
-    bool validMove(Position startPosition, Position destinationPosition, int movingPlayerColor) const;
+    bool validMove(Position startPosition, Position destinationPosition) const;
 
-    bool validPositions(Position startPosition, Position destinationPosition, int movingPlayerColor) const ;
+    bool validPositions(Position startPosition, Position destinationPosition) const ;
 
     bool validPath(const PiecePath &piecePath) const ;
 
@@ -41,7 +38,7 @@ private:
 
     Piece* movePiece(Position startPosition, Position destinationPosition);
 
-    bool kingIsThreated() const;
+    bool kingIsThreated();
 
     void switchPlayerTurn();
 
@@ -53,8 +50,6 @@ private:
 
 
 public:
-
-    friend BoardUnitTest;
 
     Board();
     

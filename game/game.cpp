@@ -154,7 +154,7 @@ void Game::play() {
 
             } 
 
-        } catch (GameException err) {
+        } catch (GameException &err) {
             cout << err.getErrMsg() << endl;
         }
 
