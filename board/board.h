@@ -9,7 +9,6 @@
 #include "../game_exception/game_exception.h"
 
 
-#define EMPTY_SQUARE_ABBREVIATION '.'
 
 
 #define WHITE_KING_INITIAL_POSITION Position(0, 3)

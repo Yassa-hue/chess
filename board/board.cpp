@@ -302,14 +302,7 @@ void Board::printBoard() {
 
             Square *square = getSquare(Position(xCoordinate, yCoordinate));
 
-            if (!square->isBusy()) {
-                cout<< EMPTY_SQUARE_ABBREVIATION << ' ';
-                continue;
-            }
-
-            Piece *piece = square->getPiece();
-
-            cout<< piece->getPrintAbbreviation() << ' ';
+            cout << square->getPrintingSymbol() << ' ';
         }
 
         cout<< endl;

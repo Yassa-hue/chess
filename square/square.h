@@ -6,6 +6,9 @@
 #include "../piece/piece.h"
 
 
+#define EMPTY_SQUARE_ABBREVIATION '.'
+
+
 class Square {
 private:
     Piece *piece;
@@ -24,6 +27,8 @@ public:
     Piece *getPiece() const;
     
     bool isBusy() const;
+
+    char getPrintingSymbol () const;
 };
 
 

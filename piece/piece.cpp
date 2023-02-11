@@ -31,7 +31,7 @@ string Piece::getName() const {
 }
 
 
-char Piece::getPrintAbbreviation() const {
+char Piece::getPrintingAbbreviation() const {
 
     if (getName() == "Knight") {
         if (getColor() == WHITE_COLOR) {

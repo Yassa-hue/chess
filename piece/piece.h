@@ -60,7 +60,7 @@ public:
 
     string getName() const;
 
-    char getPrintAbbreviation() const;
+    char getPrintingAbbreviation() const;
 
     virtual ~Piece() = default;
 };
