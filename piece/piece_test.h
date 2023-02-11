@@ -39,7 +39,7 @@ private:
         return true;
     }
 public:
-    void runTests (vector<PieceTestCase> &testCases , bool color = WHIGHT_COLOR) {
+    void runTests (vector<PieceTestCase> &testCases , bool color = WHITE_COLOR) {
 
         for (PieceTestCase &testCase : testCases) {
             PieceClass *piece = new PieceClass(color, testCase.getTestInput().initialPosintion);

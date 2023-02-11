@@ -8,7 +8,7 @@
 #include "board.h"
 
 
-Board::Board() : currentPlayerColor(WHIGHT_COLOR), 
+Board::Board() : currentPlayerColor(WHITE_COLOR), 
     whiteKingCurrentPosition(WHITE_KING_INITIAL_POSITION),
     blackKingCurrentPosition(BLACK_KING_INITIAL_POSITION) {
     board = vector <vector <Square *>> (BOARD_SIZE, vector <Square *>(BOARD_SIZE, nullptr));
@@ -19,7 +19,7 @@ Board::Board() : currentPlayerColor(WHIGHT_COLOR),
 
 Piece* Board::applyMove(Position startPosition, Position destinationPosition) {
  
-    if (!validMove(startPosition, destinationPosition, currentPlayerColor)) {
+    if (!validMove(startPosition, destinationPosition)) {
         throw GameException("Invalid move");
     }
 
@@ -37,6 +37,7 @@ Piece* Board::applyMove(Position startPosition, Position destinationPosition) {
 
     if (kingIsThreated()) {
         movePiece(destinationPosition, startPosition);
+        setPiece(deadPiece);
         throw GameException("The king will die if this move is applied");
     }
 
@@ -72,8 +73,8 @@ Piece* Board::movePiece(Position startPosition, Position destinationPosition) {
 
 
 
-bool Board::validMove(Position startPosition, Position destinationPosition, int movingPlayerColor) const {
-    if (!validPositions(startPosition, destinationPosition, movingPlayerColor)) {
+bool Board::validMove(Position startPosition, Position destinationPosition) const {
+    if (!validPositions(startPosition, destinationPosition)) {
         return false;
     }
 
@@ -102,7 +103,7 @@ bool Board::validMove(Position startPosition, Position destinationPosition, int 
 
 
 
-bool Board::validPositions(Position startPosition, Position destinationPosition, int movingPlayerColor) const {
+bool Board::validPositions(Position startPosition, Position destinationPosition) const {
     
     if (startPosition.isOutOfBoard()) {
         return false;
@@ -119,10 +120,9 @@ bool Board::validPositions(Position startPosition, Position destinationPosition,
 
     Piece *movingPiece = getSquare(startPosition)->getPiece();
 
-    if (movingPiece->getColor() != movingPlayerColor) {
+    if (movingPiece->getColor() != currentPlayerColor) {
         return false;
     }
-
     return true;
 }
 
@@ -204,17 +204,11 @@ bool Board::pawnValidPath(const Position &startPosition, const PiecePath &pawnPa
 
 
 
-bool Board::kingIsThreated () const {
+bool Board::kingIsThreated () {
     Position currentKingPosition = 
-        (currentPlayerColor == WHIGHT_COLOR ? 
+        (currentPlayerColor == WHITE_COLOR ? 
             whiteKingCurrentPosition 
             : blackKingCurrentPosition);
-
-    
-    int opponentPlayerColor = 
-        (currentPlayerColor == WHIGHT_COLOR ? 
-            BLACK_COLOR 
-            : WHIGHT_COLOR);
 
 
 
@@ -223,24 +217,28 @@ bool Board::kingIsThreated () const {
             Position threatingPosition = Position(x, y);
             Square *threatingSquare = getSquare(threatingPosition);
 
-
+            switchPlayerTurn();
             
             if (!threatingSquare->isBusy()) {
+                switchPlayerTurn();
                 continue;
             }
 
             
 
 
-            if (threatingSquare->getPiece()->getColor() == currentPlayerColor) {
+            if (threatingSquare->getPiece()->getColor() != currentPlayerColor) {
+                switchPlayerTurn();
                 continue;
             }
 
-            
 
-            if (!validMove(threatingPosition, currentKingPosition, opponentPlayerColor)) {
+            if (!validMove(threatingPosition, currentKingPosition)) {
+                switchPlayerTurn();
                 continue;
             }
+
+            switchPlayerTurn();
 
             return true;
         }
@@ -255,10 +253,10 @@ bool Board::kingIsThreated () const {
 
 
 void Board::switchPlayerTurn() {
-    if (currentPlayerColor == WHIGHT_COLOR) {
+    if (currentPlayerColor == WHITE_COLOR) {
         currentPlayerColor = BLACK_COLOR;
     } else {
-        currentPlayerColor = WHIGHT_COLOR;
+        currentPlayerColor = WHITE_COLOR;
     }
 }
 
@@ -266,7 +264,7 @@ void Board::switchPlayerTurn() {
 
 
 void Board::updateKingPosition(const Position &newPosition) {
-    if (currentPlayerColor == WHIGHT_COLOR) {
+    if (currentPlayerColor == WHITE_COLOR) {
         whiteKingCurrentPosition = newPosition;
     } else {
         blackKingCurrentPosition = newPosition;
@@ -291,30 +289,23 @@ int Board::getCurrentPlayerColor() const {
 
 void Board::printBoard() {
     // print y coordinates in char
-    cout << "   ";
+    cout<< "   ";
     for (char yCharCoordinate = 'A'; yCharCoordinate <= 'H'; yCharCoordinate++) {
-        cout << yCharCoordinate << ' ';
+        cout<< yCharCoordinate << ' ';
     }
-    cout << "\n\n";
+    cout<< "\n\n";
 
     for (int xCoordinate = 0; xCoordinate < BOARD_SIZE; xCoordinate++) {
-        cout << xCoordinate << "  ";
+        cout<< xCoordinate << "  ";
         for (int yCoordinate = 0; yCoordinate < BOARD_SIZE; yCoordinate++) {
             
 
             Square *square = getSquare(Position(xCoordinate, yCoordinate));
 
-            if (!square->isBusy()) {
-                cout << EMPTY_SQUARE_ABBREVIATION << ' ';
-                continue;
-            }
-
-            Piece *piece = square->getPiece();
-
-            cout << piece->getPrintAbbreviation() << ' ';
+            cout << square->getPrintingSymbol() << ' ';
         }
 
-        cout << endl;
+        cout<< endl;
         
     }
     
@@ -338,18 +329,21 @@ bool Board::currentPlayerIsCheckMated() {
         Position destinationPosition(0, 0);
 
         while (!destinationPosition.isOutOfBoard()) {
-            if (!validMove(startPosition, destinationPosition, currentPlayerColor)) {
+            if (!validMove(startPosition, destinationPosition)) {
+                ++destinationPosition;
                 continue;
             }
 
-            movePiece(startPosition, destinationPosition);
+            Piece*deadPiece = movePiece(startPosition, destinationPosition);
 
             bool kingIsDead = kingIsThreated();
 
             movePiece(destinationPosition, startPosition);
 
-            if (kingIsDead) {
-                return true;
+            setPiece(deadPiece);
+
+            if (!kingIsDead) {
+                return false;
             }
 
             ++destinationPosition;
@@ -357,13 +351,14 @@ bool Board::currentPlayerIsCheckMated() {
         
         ++startPosition;
     }
-    
-    return false;
+    return true;
 }
 
 
 
 void Board::setPiece(Piece *piece) {
+    if (piece == nullptr)
+        return;
     getSquare(piece->getPosition())
     ->setPiece(piece);
 }

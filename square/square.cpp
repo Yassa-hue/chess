@@ -40,3 +40,13 @@ Piece *Square::getPiece() const {
 bool Square::isBusy() const {
     return (piece != nullptr);
 }
+
+
+
+char Square::getPrintingSymbol () const {
+    if (!isBusy()) {
+        return EMPTY_SQUARE_ABBREVIATION;
+    }
+
+    return getPiece()->getPrintingAbbreviation();
+}

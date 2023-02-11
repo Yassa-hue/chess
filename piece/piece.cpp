@@ -31,7 +31,16 @@ string Piece::getName() const {
 }
 
 
-char Piece::getPrintAbbreviation() const {
+char Piece::getPrintingAbbreviation() const {
+
+    if (getName() == "Knight") {
+        if (getColor() == WHITE_COLOR) {
+            return 'N';
+        } else {
+            return 'n';
+        }
+    }
+
     char printAbbreviation = getName().front();
 
     // if the piece is black convert from capital to small
