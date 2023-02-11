@@ -27,20 +27,20 @@ Game::~Game() {
 
 
 void Game::createPieces() {
-    whitePieces.push_back(new KingPiece(WHIGHT_COLOR, WHITE_KING_INITIAL_POSITION));
-    whitePieces.push_back(new QueenPiece(WHIGHT_COLOR, WHITE_QUEEN_INITIAL_POSITION));
+    whitePieces.push_back(new KingPiece(WHITE_COLOR, WHITE_KING_INITIAL_POSITION));
+    whitePieces.push_back(new QueenPiece(WHITE_COLOR, WHITE_QUEEN_INITIAL_POSITION));
 
-    whitePieces.push_back(new BishopPiece(WHIGHT_COLOR, LEFT_WHITE_BISHOP_INITIAL_POSITION));
-    whitePieces.push_back(new BishopPiece(WHIGHT_COLOR, RIGHT_WHITE_BISHOP_INITIAL_POSITION));
+    whitePieces.push_back(new BishopPiece(WHITE_COLOR, LEFT_WHITE_BISHOP_INITIAL_POSITION));
+    whitePieces.push_back(new BishopPiece(WHITE_COLOR, RIGHT_WHITE_BISHOP_INITIAL_POSITION));
 
-    whitePieces.push_back(new KnightPiece(WHIGHT_COLOR, LEFT_WHITE_NIGHT_INITIAL_POSITION));
-    whitePieces.push_back(new KnightPiece(WHIGHT_COLOR, RIGHT_WHITE_NIGHT_INITIAL_POSITION));
+    whitePieces.push_back(new KnightPiece(WHITE_COLOR, LEFT_WHITE_NIGHT_INITIAL_POSITION));
+    whitePieces.push_back(new KnightPiece(WHITE_COLOR, RIGHT_WHITE_NIGHT_INITIAL_POSITION));
 
-    whitePieces.push_back(new RockPiece(WHIGHT_COLOR, LEFT_WHITE_ROCK_INITIAL_POSITION));
-    whitePieces.push_back(new RockPiece(WHIGHT_COLOR, RIGHT_WHITE_ROCK_INITIAL_POSITION));
+    whitePieces.push_back(new RockPiece(WHITE_COLOR, LEFT_WHITE_ROCK_INITIAL_POSITION));
+    whitePieces.push_back(new RockPiece(WHITE_COLOR, RIGHT_WHITE_ROCK_INITIAL_POSITION));
 
     for (size_t yCoordinate = 0; yCoordinate < PAWNS_NUM; yCoordinate++) {
-        whitePieces.push_back(new PawnPiece(WHIGHT_COLOR, Position(WHITE_PAWNS_X_COORDINATE, yCoordinate)));
+        whitePieces.push_back(new PawnPiece(WHITE_COLOR, Position(WHITE_PAWNS_X_COORDINATE, yCoordinate)));
     }
     
 
@@ -114,7 +114,7 @@ void Game::play() {
         
         // get input
 
-        cout << (board->getCurrentPlayerColor() == WHIGHT_COLOR ? "White" : "Black");
+        cout << (board->getCurrentPlayerColor() == WHITE_COLOR ? "White" : "Black");
 
         cout << " Player turn";
         cout << endl;
@@ -146,7 +146,7 @@ void Game::play() {
             if (deadPiece != nullptr) {
                 int deadPieceColor = deadPiece->getColor();
 
-                if (deadPieceColor == WHIGHT_COLOR) {
+                if (deadPieceColor == WHITE_COLOR) {
                     deadWhitePieces.push_back(deadPiece);
                 } else {
                     deadBlackPieces.push_back(deadPiece);
@@ -165,7 +165,7 @@ void Game::play() {
         // if player wins ends
         if (board->currentPlayerIsCheckMated()) {
             int defeatedPlayerColor = board->getCurrentPlayerColor();
-            if (defeatedPlayerColor == WHIGHT_COLOR) {
+            if (defeatedPlayerColor == WHITE_COLOR) {
                 cout << "Black player wins" << endl;
             } else {
                 cout << "White player wins" << endl;

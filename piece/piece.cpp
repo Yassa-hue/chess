@@ -34,7 +34,7 @@ string Piece::getName() const {
 char Piece::getPrintAbbreviation() const {
 
     if (getName() == "Knight") {
-        if (getColor() == WHIGHT_COLOR) {
+        if (getColor() == WHITE_COLOR) {
             return 'N';
         } else {
             return 'n';

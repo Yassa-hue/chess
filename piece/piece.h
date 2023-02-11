@@ -5,7 +5,7 @@
 #ifndef COLORS_DECLERATION
 
 #define COLORS_DECLERATION
-#define WHIGHT_COLOR 1
+#define WHITE_COLOR 1
 #define BLACK_COLOR 0
 
 #endif

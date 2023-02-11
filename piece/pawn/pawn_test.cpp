@@ -14,7 +14,7 @@ int main() {
     };
 
     TestRunner <PawnPiece> testRunner;
-    testRunner.runTests(testCases , WHIGHT_COLOR);
+    testRunner.runTests(testCases , WHITE_COLOR);
     testCases.clear();
     testCases = {
         PieceTestCase("valid test black", 6, {Position(4, 4), Position(5, 4)}, {Position(5, 4)}),

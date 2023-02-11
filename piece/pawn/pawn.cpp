@@ -22,7 +22,7 @@ PawnPiece::PawnPiece(bool color, Position Position)
 PiecePath PawnPiece::pathTo(Position finalPosition) const {
 
     Position currentPosition = getPosition();
-    if(color == WHIGHT_COLOR){
+    if(color == WHITE_COLOR){
 
         // special case if I'm in the second row
         // you can move 2 steps instead of 1

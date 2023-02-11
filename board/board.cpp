@@ -8,7 +8,7 @@
 #include "board.h"
 
 
-Board::Board() : currentPlayerColor(WHIGHT_COLOR), 
+Board::Board() : currentPlayerColor(WHITE_COLOR), 
     whiteKingCurrentPosition(WHITE_KING_INITIAL_POSITION),
     blackKingCurrentPosition(BLACK_KING_INITIAL_POSITION) {
     board = vector <vector <Square *>> (BOARD_SIZE, vector <Square *>(BOARD_SIZE, nullptr));
@@ -206,7 +206,7 @@ bool Board::pawnValidPath(const Position &startPosition, const PiecePath &pawnPa
 
 bool Board::kingIsThreated () {
     Position currentKingPosition = 
-        (currentPlayerColor == WHIGHT_COLOR ? 
+        (currentPlayerColor == WHITE_COLOR ? 
             whiteKingCurrentPosition 
             : blackKingCurrentPosition);
 
@@ -253,10 +253,10 @@ bool Board::kingIsThreated () {
 
 
 void Board::switchPlayerTurn() {
-    if (currentPlayerColor == WHIGHT_COLOR) {
+    if (currentPlayerColor == WHITE_COLOR) {
         currentPlayerColor = BLACK_COLOR;
     } else {
-        currentPlayerColor = WHIGHT_COLOR;
+        currentPlayerColor = WHITE_COLOR;
     }
 }
 
@@ -264,7 +264,7 @@ void Board::switchPlayerTurn() {
 
 
 void Board::updateKingPosition(const Position &newPosition) {
-    if (currentPlayerColor == WHIGHT_COLOR) {
+    if (currentPlayerColor == WHITE_COLOR) {
         whiteKingCurrentPosition = newPosition;
     } else {
         blackKingCurrentPosition = newPosition;
