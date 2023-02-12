@@ -388,8 +388,8 @@ bool Board::isUpgradingPosition(Position destinationPosition) const {
         and the pawn is at the end of its journey accourding to its color. 
     */
      Piece *piece= getSquare(destinationPosition)->getPiece();
-     string piece_name= piece->getName();
-     if(piece_name =="Pawn" && (destinationPosition.x==BOARD_FIRST_X||destinationPosition.x==BOARD_LAST_X))
+     string pieceName= piece->getName();
+     if(pieceName =="Pawn" && (destinationPosition.x==BOARD_FIRST_X||destinationPosition.x==BOARD_LAST_X))
      {
         return true;
      }
