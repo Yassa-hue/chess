@@ -152,7 +152,20 @@ void Game::play() {
                     deadBlackPieces.push_back(deadPiece);
                 }
 
-            } 
+            }
+
+            if (board->isUpgradingPosition(destinationPosition)) {
+                int opponentColor = board->getCurrentPlayerColor();
+                int upgradedPawnColor;
+
+                if (opponentColor == WHITE_COLOR) {
+                    upgradedPawnColor = BLACK_COLOR;
+                } else {
+                    upgradedPawnColor = WHITE_COLOR;
+                }
+                
+                upgradePawn(destinationPosition, upgradedPawnColor);
+            }
 
         } catch (GameException &err) {
             cout << err.getErrMsg() << endl;
@@ -189,4 +202,55 @@ void Game::clearScreen() const {
             cout << '\n';
         }
         cout << endl;
+}
+
+
+
+
+
+void Game::printPawnUpgradingChoices() const {
+
+
+
+}
+
+
+
+void Game::upgradePawn(Position newPiecePosition, int newPieceColor) {
+    
+    // print the choices
+
+
+
+
+
+    // take the choice
+    int upgradeChoice;
+    cin >> upgradeChoice;
+
+
+    // use switch to decide what is the piece that you should upgrade to
+    // if the input is invalid print an error msg
+    // Please look at the Pawn upgrading choices in game.h
+    Piece *newPiece = nullptr;
+
+
+    switch (upgradeChoice) {
+    // this is un example to upgrade to a queen
+    case UPGRADE_PAWN_TO_QUEEN: {
+        newPiece = new QueenPiece(newPieceColor, newPiecePosition);   
+        break;
+    }
+    
+    default:
+        break;
+    }
+
+
+    // add the new piece to the pieces set accourding to its color
+
+
+    // set the piece on the board 
+
+
 }

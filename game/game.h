@@ -54,6 +54,14 @@
 
 
 
+// Pawn upgrading choices
+#define UPGRADE_PAWN_TO_QUEEN 1
+#define UPGRADE_PAWN_TO_BISHOP 2
+#define UPGRADE_PAWN_TO_KNIGHT 3
+#define UPGRADE_PAWN_TO_ROCK 4
+
+
+
 
 class Game {
 private:
@@ -71,6 +79,12 @@ private:
     int convertYCoordinateToInt(char yCoordinate);
 
     void clearScreen() const;
+
+    void printPawnUpgradingChoices() const;
+
+    void upgradePawn(Position newPiecePosition, int newPieceColor);
+
+
 public:
 
     Game();

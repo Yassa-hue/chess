@@ -62,6 +62,8 @@ public:
 
     int getCurrentPlayerColor() const;
 
+    bool isUpgradingPosition(Position destinationPosition) const;
+
     ~Board();
 };
 

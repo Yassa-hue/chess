@@ -379,6 +379,21 @@ void Board::createBoardSquares() {
 
 
 
+
+
+
+bool Board::isUpgradingPosition(Position destinationPosition) const {
+    /*
+        Position is upgrading if there is pawn at this position 
+        and the pawn is at the end of its journey accourding to its color. 
+    */
+
+   
+}
+
+
+
+
 Board::~Board() {
     for (size_t i = 0; i < BOARD_SIZE; i++) {
         for (size_t j = 0; j < BOARD_SIZE; j++) {
