@@ -220,8 +220,18 @@ void Game::printPawnUpgradingChoices() const {
 
     for(auto deadPiece : typeOfPiece){
         pieceName=deadPiece->getName();
-        if(pieceName!="pawn"&&isFoundPiece.find(pieceName)==isFoundPiece.end()){
-            cout<<"********"<<pieceName<<"********\n";
+        if(pieceName!="pawn"&&pieceName!="King"&&isFoundPiece.find(pieceName)==isFoundPiece.end()){
+            if(pieceName=="Queen"){
+                cout<<"UPGRADE_PAWN_TO_QUEEN  "<<UPGRADE_PAWN_TO_QUEEN;
+            }
+            else if(pieceName=="Knight"){
+                cout<<"UPGRADE_PAWN_TO_KNIGHT  "<<UPGRADE_PAWN_TO_KNIGHT;
+            }else if(pieceName=="Bishop"){
+                cout<<"UPGRADE_PAWN_TO_BISHOP  "<<UPGRADE_PAWN_TO_BISHOP;
+            }else if(pieceName=="ROCK"){
+                cout<<"UPGRADE_PAWN_TO_ROCK  "<<UPGRADE_PAWN_TO_ROCK;
+            }
+            cout<<"\n";
             isFoundPiece[pieceName]=true;
         }
     }
