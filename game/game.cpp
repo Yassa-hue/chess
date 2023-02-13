@@ -214,13 +214,10 @@ void Game::printPawnUpgradingChoices() const {
     map<string,bool>isFoundPiece;
     string pieceName;
     vector<Piece*> typeOfPiece;
-    if(color==WHITE_COLOR){
-        typeOfPiece=deadWhitePieces;
-    }
-    else{
-        typeOfPiece=deadBlackPieces;
-    }
+
+    typeOfPiece=(color==WHITE_COLOR? deadWhitePieces:deadBlackPieces);
     
+
     for(auto deadPiece : typeOfPiece){
         pieceName=deadPiece->getName();
         if(pieceName!="pawn"&&isFoundPiece.find(pieceName)==isFoundPiece.end()){
