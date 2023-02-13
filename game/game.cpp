@@ -1,6 +1,7 @@
 
 
 #include "game.h"
+#include <map>
 
 Game::Game () {
     board = new Board();
@@ -209,8 +210,24 @@ void Game::clearScreen() const {
 
 
 void Game::printPawnUpgradingChoices() const {
-
-
+    int color=board->getCurrentPlayerColor();
+    map<string,bool>isFoundPiece;
+    string pieceName;
+    vector<Piece*> typeOfPiece;
+    if(color==WHITE_COLOR){
+        typeOfPiece=deadWhitePieces;
+    }
+    else{
+        typeOfPiece=deadBlackPieces;
+    }
+    
+    for(auto deadPiece : typeOfPiece){
+        pieceName=deadPiece->getName();
+        if(pieceName!="pawn"&&isFoundPiece.find(pieceName)==isFoundPiece.end()){
+            cout<<"********"<<pieceName<<"********\n";
+            isFoundPiece[pieceName]=true;
+        }
+    }
 
 }
 
@@ -219,8 +236,7 @@ void Game::printPawnUpgradingChoices() const {
 void Game::upgradePawn(Position newPiecePosition, int newPieceColor) {
     
     // print the choices
-
-
+    printPawnUpgradingChoices();
 
 
 

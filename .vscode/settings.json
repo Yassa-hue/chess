@@ -7,7 +7,8 @@
         "locale": "cpp",
         "string": "cpp",
         "type_traits": "cpp",
-        "__config": "cpp"
+        "__config": "cpp",
+        "vector": "cpp"
     },
     "workbench.tree.indent": 4
 }
