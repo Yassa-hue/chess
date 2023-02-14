@@ -8,7 +8,8 @@
         "string": "cpp",
         "type_traits": "cpp",
         "__config": "cpp",
-        "vector": "cpp"
+        "vector": "cpp",
+        "iostream": "cpp"
     },
     "workbench.tree.indent": 4
 }

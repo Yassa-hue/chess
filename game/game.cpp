@@ -210,32 +210,14 @@ void Game::clearScreen() const {
 
 
 void Game::printPawnUpgradingChoices() const {
-    int color=board->getCurrentPlayerColor();
-    map<string,bool>isFoundPiece;
-    string pieceName;
-    vector<Piece*> typeOfPiece;
-
-    typeOfPiece=(color==WHITE_COLOR? deadWhitePieces:deadBlackPieces);
     
+    cout<<"UPGRADE_PAWN_TO_QUEEN  "<<UPGRADE_PAWN_TO_QUEEN<<"\n";
 
-    for(auto deadPiece : typeOfPiece){
-        pieceName=deadPiece->getName();
-        if(pieceName!="pawn"&&pieceName!="King"&&isFoundPiece.find(pieceName)==isFoundPiece.end()){
-            if(pieceName=="Queen"){
-                cout<<"UPGRADE_PAWN_TO_QUEEN  "<<UPGRADE_PAWN_TO_QUEEN;
-            }
-            else if(pieceName=="Knight"){
-                cout<<"UPGRADE_PAWN_TO_KNIGHT  "<<UPGRADE_PAWN_TO_KNIGHT;
-            }else if(pieceName=="Bishop"){
-                cout<<"UPGRADE_PAWN_TO_BISHOP  "<<UPGRADE_PAWN_TO_BISHOP;
-            }else if(pieceName=="ROCK"){
-                cout<<"UPGRADE_PAWN_TO_ROCK  "<<UPGRADE_PAWN_TO_ROCK;
-            }
-            cout<<"\n";
-            isFoundPiece[pieceName]=true;
-        }
-    }
+    cout<<"UPGRADE_PAWN_TO_KNIGHT "<<UPGRADE_PAWN_TO_KNIGHT<<"\n";
 
+    cout<<"UPGRADE_PAWN_TO_BISHOP "<<UPGRADE_PAWN_TO_BISHOP<<"\n";
+
+    cout<<"UPGRADE_PAWN_TO_ROCK   "<<UPGRADE_PAWN_TO_ROCK<<"\n";
 }
 
 
@@ -264,16 +246,32 @@ void Game::upgradePawn(Position newPiecePosition, int newPieceColor) {
         newPiece = new QueenPiece(newPieceColor, newPiecePosition);   
         break;
     }
-    
+    case UPGRADE_PAWN_TO_BISHOP:{
+        newPiece=new BishopPiece(newPieceColor,newPiecePosition);
+        break;
+    }
+    case UPGRADE_PAWN_TO_KNIGHT:{
+        newPiece=new KnightPiece(newPieceColor,newPiecePosition);
+        break;
+    }
+    case UPGRADE_PAWN_TO_ROCK:{
+        newPiece=new RockPiece(newPieceColor,newPiecePosition);
+        break;
+    }
     default:
+        throw GameException("Invalid choice");
         break;
     }
 
 
     // add the new piece to the pieces set accourding to its color
-
+    if(newPiece->getColor() == WHITE_COLOR){
+        whitePieces.push_back(newPiece);
+    }else{
+        blackPieces.push_back(newPiece);
+    }
 
     // set the piece on the board 
-
+    board->setPiece(newPiece);
 
 }

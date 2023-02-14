@@ -21,7 +21,7 @@ protected:
 public:
 
     GameException(string errMsg) : exception(), errMsg(errMsg) {
-
+        
     };
 
 

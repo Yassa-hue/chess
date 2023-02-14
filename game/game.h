@@ -68,7 +68,7 @@ private:
     Board *board;
 
     vector <Piece*> whitePieces, blackPieces, deadBlackPieces, deadWhitePieces;
-
+    
 
     void createPieces();
 
