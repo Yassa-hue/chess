@@ -211,13 +211,13 @@ void Game::clearScreen() const {
 
 void Game::printPawnUpgradingChoices() const {
     
-    cout<<"upgrade to queen "<<UPGRADE_PAWN_TO_QUEEN<<"\n";
+    cout<<UPGRADE_PAWN_TO_QUEEN <<" :upgrade to queen\n";
 
-    cout<<"upgrade to knight "<<UPGRADE_PAWN_TO_KNIGHT<<"\n";
+    cout<<UPGRADE_PAWN_TO_BISHOP<<" :upgrade to bishop\n";
 
-    cout<<"upgrade to bishop "<<UPGRADE_PAWN_TO_BISHOP<<"\n";
+    cout<<UPGRADE_PAWN_TO_KNIGHT<<" :upgrade to knight\n";
 
-    cout<<"upgrade to rock "<<UPGRADE_PAWN_TO_ROCK<<"\n";
+    cout<<UPGRADE_PAWN_TO_ROCK  <<" :upgrade to rock\n";
 }
  
 
