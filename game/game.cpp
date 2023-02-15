@@ -1,6 +1,7 @@
 
 
 #include "game.h"
+#include <map>
 
 Game::Game () {
     board = new Board();
@@ -152,7 +153,20 @@ void Game::play() {
                     deadBlackPieces.push_back(deadPiece);
                 }
 
-            } 
+            }
+
+            if (board->isUpgradingPosition(destinationPosition)) {
+                int opponentColor = board->getCurrentPlayerColor();
+                int upgradedPawnColor;
+
+                if (opponentColor == WHITE_COLOR) {
+                    upgradedPawnColor = BLACK_COLOR;
+                } else {
+                    upgradedPawnColor = WHITE_COLOR;
+                }
+                
+                upgradePawn(destinationPosition, upgradedPawnColor);
+            }
 
         } catch (GameException &err) {
             cout << err.getErrMsg() << endl;
@@ -189,4 +203,75 @@ void Game::clearScreen() const {
             cout << '\n';
         }
         cout << endl;
+}
+
+
+
+
+
+void Game::printPawnUpgradingChoices() const {
+    
+    cout<<UPGRADE_PAWN_TO_QUEEN <<" :upgrade to queen\n";
+
+    cout<<UPGRADE_PAWN_TO_BISHOP<<" :upgrade to bishop\n";
+
+    cout<<UPGRADE_PAWN_TO_KNIGHT<<" :upgrade to knight\n";
+
+    cout<<UPGRADE_PAWN_TO_ROCK  <<" :upgrade to rock\n";
+}
+ 
+
+
+void Game::upgradePawn(Position newPiecePosition, int newPieceColor) {
+    
+    // print the choices
+    printPawnUpgradingChoices();
+
+
+
+    // take the choice
+    int upgradeChoice;
+    cin >> upgradeChoice;
+
+
+    // use switch to decide what is the piece that you should upgrade to
+    // if the input is invalid print an error msg
+    // Please look at the Pawn upgrading choices in game.h
+    Piece *newPiece = nullptr;
+
+
+    switch (upgradeChoice) {
+    // this is un example to upgrade to a queen
+    case UPGRADE_PAWN_TO_QUEEN: {
+        newPiece = new QueenPiece(newPieceColor, newPiecePosition);   
+        break;
+    }
+    case UPGRADE_PAWN_TO_BISHOP:{
+        newPiece=new BishopPiece(newPieceColor,newPiecePosition);
+        break;
+    }
+    case UPGRADE_PAWN_TO_KNIGHT:{
+        newPiece=new KnightPiece(newPieceColor,newPiecePosition);
+        break;
+    }
+    case UPGRADE_PAWN_TO_ROCK:{
+        newPiece=new RockPiece(newPieceColor,newPiecePosition);
+        break;
+    }
+    default:
+        throw GameException("Invalid choice");
+        break;
+    }
+
+
+    // add the new piece to the pieces set accourding to its color
+    if(newPiece->getColor() == WHITE_COLOR){
+        whitePieces.push_back(newPiece);
+    }else{
+        blackPieces.push_back(newPiece);
+    }
+
+    // set the piece on the board 
+    board->setPiece(newPiece);
+
 }
