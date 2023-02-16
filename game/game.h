@@ -12,6 +12,10 @@
 #include "../piece/knight/knight.h"
 #include "../piece/rock/rock.h"
 #include "../piece/pawn/pawn.h"
+#include "../position_validator/position_validator.h"
+#include "../path_validator/path_validator.h"
+#include "../move_validator/move_validator.h"
+#include "../king_state/king_state.h"
 
 
 
@@ -66,13 +70,15 @@
 class Game {
 private:
     Board *board;
+    PositionValidator *positionValidator;
+    PathValidator *pathValidator;
+    MoveValidator *moveValidator;
+    KingState *kingState;
 
     vector <Piece*> whitePieces, blackPieces, deadBlackPieces, deadWhitePieces;
     
 
     void createPieces();
-
-    void putPiecesInBoard();
 
     void printDeadPieces();
 
