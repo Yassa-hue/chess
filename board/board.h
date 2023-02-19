@@ -23,46 +23,32 @@ private:
 
     vector <vector <Square *>> board;
 
-    bool validMove(Position startPosition, Position destinationPosition) const;
-
-    bool validPositions(Position startPosition, Position destinationPosition) const ;
-
-    bool validPath(const PiecePath &piecePath) const ;
-
-    bool pathIsBlocked(const PiecePath &path) const;
-
-    bool existOpponentPieceAtEndOfPath(const Position &endOfPath) const ;
-
-    bool pawnValidPath(const Position &startPosition, const PiecePath &pawnPath) const;
-
-    Piece* movePiece(Position startPosition, Position destinationPosition);
-
-    bool kingIsThreated();
-
-    void switchPlayerTurn();
-
-    void updateKingPosition(const Position &newPosition);
-
-    Square *getSquare(const Position &squarePosition) const;
-
     void createBoardSquares ();
 
+    void putPiecesOnBoard (const vector <Piece*> pieces);
+
+    // Empty constructor used for testing
+    Board();
 
 public:
 
-    Board();
-    
-    Piece* applyMove(Position startPosition, Position destinationPosition);
+    Board(const vector <Piece*> whitePieces, const vector <Piece*> blackPieces);
+
+    Piece* movePiece(Position startPosition, Position destinationPosition);
+
+    Square *getSquare(const Position &squarePosition) const;
+
+    void switchPlayerTurn();
 
     void setPiece(Piece *piece);
 
-    void printBoard();
+    void updateKingPosition(const Position &newPosition);
 
-    bool currentPlayerIsCheckMated();
+    void printBoard();
 
     int getCurrentPlayerColor() const;
 
-    bool isUpgradingPosition(Position destinationPosition) const;
+    Position getCurrentKingPosition() const;
 
     ~Board();
 };

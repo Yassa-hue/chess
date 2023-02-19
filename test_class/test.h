@@ -43,7 +43,7 @@ public:
     }
 
 
-    const TestInput &getTestInput () const {
+    TestInput getTestInput () const {
         return testInput;
     }
 

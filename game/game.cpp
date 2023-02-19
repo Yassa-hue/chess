@@ -4,14 +4,23 @@
 #include <map>
 
 Game::Game () {
-    board = new Board();
     whitePieces = vector<Piece*> ();
     blackPieces = vector<Piece*> ();
     deadWhitePieces = vector<Piece*> ();
     deadBlackPieces = vector<Piece*> ();
 
     createPieces();
-    putPiecesInBoard();
+    
+    board = new Board(whitePieces, blackPieces);
+
+    positionValidator = new PositionValidator(board);
+
+    pathValidator = new PathValidator(board);
+
+    moveValidator = new MoveValidator(board, positionValidator, pathValidator, kingState);
+
+    kingState = new KingState(board, moveValidator);
+
 }
 
 
@@ -64,16 +73,6 @@ void Game::createPieces() {
     }
 }
 
-
-
-void Game::putPiecesInBoard() {
-    for (Piece *piece : whitePieces) {
-        board->setPiece(piece);
-    }
-    for (Piece *piece : blackPieces) {
-        board->setPiece(piece);
-    }
-}
 
 
 
@@ -142,7 +141,7 @@ void Game::play() {
         // apply move
         try {
 
-            Piece *deadPiece = board->applyMove(startPosition, destinationPosition);
+            Piece *deadPiece = moveValidator->applyMove(startPosition, destinationPosition);
 
             if (deadPiece != nullptr) {
                 int deadPieceColor = deadPiece->getColor();
@@ -155,7 +154,7 @@ void Game::play() {
 
             }
 
-            if (board->isUpgradingPosition(destinationPosition)) {
+            if (positionValidator->isUpgradingPosition(destinationPosition)) {
                 int opponentColor = board->getCurrentPlayerColor();
                 int upgradedPawnColor;
 
@@ -177,7 +176,7 @@ void Game::play() {
 
 
         // if player wins ends
-        if (board->currentPlayerIsCheckMated()) {
+        if (kingState->currentPlayerIsCheckMated()) {
             int defeatedPlayerColor = board->getCurrentPlayerColor();
             if (defeatedPlayerColor == WHITE_COLOR) {
                 cout << "Black player wins" << endl;
